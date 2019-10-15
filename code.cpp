@@ -240,3 +240,72 @@ class orario {
 void orario::StampaSecondi() const {
   std::cout << sec << std::endl;
 }
+
+int x = 2;
+int& a = x;
+int& a1 = 2;
+a = 5;
+int y = 3;
+a = y;
+
+int x = 2;
+int* p = &x;
+*p = 5;
+int y = 3;
+p = &y;
+
+int x = 2;
+int* const p = &x;
+*p = 5;
+int y = 3;
+p = &y;
+
+int x = 2;
+int& const r = x;
+
+int x = 2;
+const int* p = &x;
+*p = 5;
+int y = 3;
+p = &y;
+
+int x = 2;
+const int* const p = &x;
+*p = 5;
+int y = 3;
+p = &y;
+
+int x = 2;
+const int& r = x;
+r = 5;
+int y = 3;
+r = y;
+
+const int& r = 4;
+r = 5;
+int y = 3;
+r = y;
+
+void fun(const int& r);
+int x = 2;
+fun(x);
+fun(4);
+
+const int& fun() {
+  return 4;
+}
+fun() = 5;
+
+void fun_ref(const int& r);
+void fun_prt(const int& p);
+int x = 2;
+fun_ref(x);
+fun_prt(&x);
+fun_ref(4);
+fun_prt(&4);
+
+void fun1(const Big& r);
+void fun2(Big v);
+Big big(...);
+fun1(big);
+fun2(big);
