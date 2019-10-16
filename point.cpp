@@ -1,69 +1,73 @@
 #include <math.h>
 #include <iostream>
 
-class point {
+// Point.h
+// interfaccia di Point
+class Point {
  private:
-  int x, y, z;
+  double x, y, z;
 
  public:
-  point();
-  point(int, int, int);
-  int X() const;
-  int Y() const;
-  int Z() const;
+  Point();
+  Point(double, double, double);
+  double X() const;
+  double Y() const;
+  double Z() const;
   void negate();
   double norm();
-  point operator+(const point&) const;
+  Point operator+(const Point&) const;
 };
 
-point::point() {
+// Point.cpp
+// implementazione di Point
+Point::Point() {
   x = 0;
   y = 0;
   z = 0;
 }
 
-point::point(int _x, int _y, int _z) {
+Point::Point(double _x, double _y, double _z) {
   x = _x;
   y = _y;
   z = _z;
 }
 
-int point::X() const {
+double Point::X() const {
   return x;
 }
 
-int point::Y() const {
+double Point::Y() const {
   return y;
 }
 
-int point::Z() const {
+double Point::Z() const {
   return z;
 }
 
-void point::negate() {
+void Point::negate() {
   x = -x;
   y = -y;
   z = -z;
 }
 
-double point::norm() {
+double Point::norm() {
   return sqrt(x * x + y * y + z * z);
 }
 
-point point::operator+(const point& p) const {
-  return point(x + p.x, y + p.y, z + p.z);
+Point Point::operator+(const Point& p) const {
+  return Point(x + p.x, y + p.y, z + p.z);
 }
 
-std::ostream& operator<<(std::ostream& os, const point& p) {
+std::ostream& operator<<(std::ostream& os, const Point& p) {
   return os << "(" << p.X() << ", " << p.Y() << ", " << p.Z() << ")";
 }
 
 int main() {
-  point A(1, 2, 3);
+  Point A(1, 2, 3);
   std::cout << A << " " << A.norm() << std::endl;
   A.negate();
   std::cout << A << " " << A.norm() << std::endl;
-  point B(1, 2, 3);
+  Point B(1, 2, 3);
   A.negate();
   B = B + A;
   std::cout << B << " " << B.norm() << std::endl;

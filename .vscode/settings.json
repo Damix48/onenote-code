@@ -2,6 +2,7 @@
   "C_Cpp.clang_format_fallbackStyle": "Chromium",
   "workbench.colorTheme": "Default Light+",
   "files.associations": {
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "vector": "cpp"
   },
 }
