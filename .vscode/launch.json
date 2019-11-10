@@ -14,13 +14,14 @@
     "environment": [],
     "externalConsole": false,
     "MIMode": "gdb",
-    "miDebuggerPath": "C:\\MinGW64\\mingw64\\bin\\gdb.exe",
+    "miDebuggerPath": "C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin\\gdb.exe",
     "setupCommands": [{
       "description": "Enable pretty-printing for gdb",
       "text": "-enable-pretty-printing",
       "ignoreFailures": true
     }],
-    "preLaunchTask": "Makefile",
-    "postDebugTask": "clean"
+    "preLaunchTask": "g++.exe build active file",
+    // "preLaunchTask": "Makefile",
+    // "postDebugTask": "clean"
   }]
 }
