@@ -84,6 +84,6 @@ int main() {
   ciao.insert(21);
   ciao.insert(1);
 
-  // std::cout << "ciao" << std::endl;
+  std::cout << "ciao" << std::endl;
   std::cout << ciao << std::endl;
 }
