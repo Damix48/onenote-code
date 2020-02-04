@@ -6,8 +6,25 @@ class SmartP;
 template <class T>
 class SmartP {
  private:
-  T info;
-  *SmartP next;
+  T* ptr;
+
+ public:
+  SmartP() : ptr(nullptr){};                         // COSTRUTTORE STANDARD
+  SmartP(const T* t) : ptr(new T(*t)){};             // COSTRUTTORE AD UN PARAMETRO
+  SmartP(const SmartP& p) : ptr(new T(*(p.ptr))){};  // COSTRUTTORE DI COPIA PROFONDA
+  SmartP& operator=(const SmartP& p) {               // ASSEGNAZIONE PROFONDA
+    delete ptr;
+    ptr = new T(*(p.ptr));
+    return *this;
+  }
+  ~SmartP() { delete ptr; }
+
+  T& operator*() { return *ptr; }
+
+  bool operator==(const SmartP& p) const { return *ptr == *p.ptr; }
+  bool operator!=(const SmartP& p) const { return !(*ptr == *p.ptr); }
+
+  T* operator->() { return ptr; }
 };
 
 class C {
@@ -22,20 +39,20 @@ int main() {
   SmartP<int> r;
   SmartP<int> s(&a);
   SmartP<int> t(s);
-  cout << *s << " " << *t << " " << *p << endl;  // 1 1 1
+  std::cout << *s << " " << *t << " " << *p << std::endl;  // 1 1 1
   *s = 2;
   *t = 3;
-  cout << *s << " " << *t << " " << *p << endl;  // 2 3 1
+  std::cout << *s << " " << *t << " " << *p << std::endl;  // 2 3 1
   r = t;
   *r = 4;
-  cout << *r << " " << *s << " " << *t << " " << *p << endl;  // 4 2 3 1
-  cout << (s == t) << " " << (s != p) << endl;                // 0 1
+  std::cout << *r << " " << *s << " " << *t << " " << *p << std::endl;  // 4 2 3 1
+  std::cout << (s == t) << " " << (s != p) << std::endl;                // 0 1
   C c;
   SmartP<C> x(&c);
-  cout << *(c.p) << " " << *(x->p) << endl;  // 5 5
+  std::cout << *(c.p) << " " << *(x->p) << std::endl;  // 5 5
   *(c.p) = 6;
-  cout << *(c.p) << " " << *(x->p) << endl;  // 6 6
+  std::cout << *(c.p) << " " << *(x->p) << std::endl;  // 6 6
   SmartP<C>* q = new SmartP<C>(&c);
   delete q;
-  cout << *(x->p) << endl;  // 6
+  std::cout << *(x->p) << std::endl;  // 6
 }
