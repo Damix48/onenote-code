@@ -9,12 +9,16 @@ class SmartP {
   T* ptr;
 
  public:
-  SmartP() : ptr(nullptr){};                         // COSTRUTTORE STANDARD
-  SmartP(const T* t) : ptr(new T(*t)){};             // COSTRUTTORE AD UN PARAMETRO
-  SmartP(const SmartP& p) : ptr(new T(*(p.ptr))){};  // COSTRUTTORE DI COPIA PROFONDA
-  SmartP& operator=(const SmartP& p) {               // ASSEGNAZIONE PROFONDA
-    delete ptr;
-    ptr = new T(*(p.ptr));
+  SmartP() : ptr(nullptr){};                                                      // COSTRUTTORE STANDARD
+  SmartP(const T* t) : ptr(t != nullptr ? new T(*t) : nullptr){};                 // COSTRUTTORE AD UN PARAMETRO
+  SmartP(const SmartP& p) : ptr(p.ptr != nullptr ? new T(*(p.ptr)) : nullptr){};  // COSTRUTTORE DI COPIA PROFONDA
+  SmartP& operator=(const SmartP& p) {                                            // ASSEGNAZIONE PROFONDA
+    if (*this != p) {
+      delete ptr;
+      if (p.ptr != nullptr) {
+        ptr = new T(*(p.ptr));
+      }
+    }
     return *this;
   }
   ~SmartP() { delete ptr; }
